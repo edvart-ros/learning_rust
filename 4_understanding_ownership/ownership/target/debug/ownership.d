@@ -1,0 +1,1 @@
+/home/edvart_wsl/programming/rust/learning_rust/4_understanding_ownership/ownership/target/debug/ownership: /home/edvart_wsl/programming/rust/learning_rust/4_understanding_ownership/ownership/src/main.rs
