@@ -66,8 +66,46 @@ fn main() {
 
 
 
+    //  OWNERSHIP AND FUNCTION
+
+    let s = String::from("hello"); //in scope, on the heap
+    takes_ownership(s);
+    // WE CANNOT USE s ANYMORE since the function took ownership of it (s got moved and then freed)
+    //println!("{s}");
 
 
+    let x = 5; // x is known at compile time. pushed onto STACK
+    makes_copy(5); // does not take ownership
+    println!("{x}");
 
 
+    // RETURN VALUES AND SCOPE
+    let s1 = gives_ownership();
+    let s2 = String::from("hello");
+    let s3 = takes_and_gives_back(s2);
+}
+
+fn takes_ownership(some_string: String) { //some_string comes into scope
+    println!("{}", some_string);
+} //some_string goes out of scope and is dropped, freeing heap memory
+
+fn makes_copy(some_integer: i32) { //some_integer comes into scope
+    println!("{}", some_integer);
+} //some_integer goes out of scope. nothing is dropped.
+
+fn gives_ownership() -> String {
+    let some_string = String::from("hello"); // some_string comes into scope
+    some_string //some_string is returned, giving ownership/moved to the caller
+}
+
+fn takes_and_gives_back(a_string: String) -> String { //a_string comes into scope.
+    // whatever was passed as the argument has been *moved* to this scope/function
+    a_string // return back the string to the caller
+}
+
+fn calculate_length(s: String) -> (String, usize) {
+    let length = s.len(); 
+    (s, length)
+    // in this way we can make sure the caller doesnt lose ownership (by taking and giving back)
+    // how do we avoid having to retur back the moved variable? see "references_borrowing"
 }
