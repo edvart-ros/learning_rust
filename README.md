@@ -1,3 +1,3 @@
 # learning rust
 
-following official rost intro.
+following official rust intro.
